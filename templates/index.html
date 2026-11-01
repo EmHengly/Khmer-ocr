@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Spotting on Khmer Printed Documents</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Word Spotting on Khmer Printed Documents</h1>
+        <div class="form-container">
+            <form id="upload-form" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="file">Choose an image:</label>
+                    <input type="file" id="file" name="file" accept="image/*" required>
+                </div>
+                <div class="form-group">
+                    <label for="target_word">Target Word/Phrase:</label>
+                    <input type="text" id="target_word" name="target_word" placeholder="Enter the target word or phrase..." required>
+                </div>
+                <button type="submit">Upload and Process</button>
+            </form>
+            <div class="image-preview">
+                <h2>Uploaded Image:</h2>
+                <img id="preview" src="#" alt="Image Preview" style="display: none;">
+            </div>
+        </div>
+        {% if filename and target_word %}
+        <div class="result">
+            <h2>Processed Image with Search Word/Phrase: "{{ target_word }}"</h2>
+            <img src="{{ url_for('result', filename=filename) }}" alt="Processed Image">
+        </div>
+        {% endif %}
+        {% if error %}
+        <div class="error">
+            <p>{{ error }}</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+        document.getElementById('file').addEventListener('change', function(event) {
+            const preview = document.getElementById('preview');
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>
+

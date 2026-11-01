@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Trained models and checkpoints
+checkpoint-*/
+finetune-kh/
+small-printed-v2/
+ocrmodel-seallm/
+Model/Model/*/checkpoint-*/
+*.safetensors
+*.pt
+*.pth
+*.onnx
+
+# Local datasets and generated training outputs
+images/
+data_test/
+train18/
+runs/
+uploads/
+results/
+*.csv
+*.parquet
+
+# Local/private documents and media
+*.jpg
+*.jpeg
+*.png
+*.pdf
+*.zip
+
+# Local configuration and logs
+.env
+.env.*
+*.log
